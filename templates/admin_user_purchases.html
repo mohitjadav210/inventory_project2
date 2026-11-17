@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>User Purchases (Last 30 Days)</h2>
+
+<table class="table">
+<tr>
+    <th>User</th>
+    <th>Product</th>
+    <th>Quantity</th>
+    <th>Date</th>
+</tr>
+
+{% for row in data %}
+<tr>
+    <td>{{ row['username'] }}</td>
+    <td>{{ row['product_name'] }}</td>
+    <td>{{ row['quantity'] }}</td>
+    <td>{{ row['created_at'] }}</td>
+</tr>
+{% endfor %}
+</table>
+
+{% endblock %}

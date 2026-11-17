@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>User Dashboard</h2>
+<p>Welcome, {{ user['username'] }}!</p>
+
+<ul>
+    <li><a href="{{ url_for('products') }}">Browse Products</a></li>
+    <li><a href="{{ url_for('view_cart') }}">View Cart</a></li>
+</ul>
+{% endblock %}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventory Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="navbar">
+    <a href="{{ url_for('index') }}">Home</a>
+    
+    {% if session.get('user_id') %}
+        <a href="{{ url_for('user_dashboard') }}">User</a>
+        {% if session.get['id'] == 'admin' %}
+            <a href="{{ url_for('admin_dashboard') }}">Admin Panel</a>
+        {% endif %}
+        <a href="{{ url_for('products') }}">Products</a>
+        <a href="{{ url_for('view_cart') }}">Cart</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    {% else %}
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('signup') }}">Signup</a>
+    {% endif %}
+</div>
+
+<div class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, msg in messages %}
+                <div class="flash flash-{{ category }}">{{ msg }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+</div>
+</body>
+</html>

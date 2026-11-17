@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Admin - Products</h2>
+
+<p><a class="btn" href="{{ url_for('admin_add_product') }}">Add New Product</a></p>
+
+<table class="table mt-2">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Actions</th>
+    </tr>
+    {% for p in products %}
+    <tr>
+        <td>{{ p['id'] }}</td>
+        <td>{{ p['name'] }}</td>
+        <td>{{ p['category'] }}</td>
+        <td>{{ "%.2f"|format(p['price']) }}</td>
+        <td>{{ p['stock'] }}</td>
+        <td>
+            <a class="btn" href="{{ url_for('admin_edit_product', product_id=p['id']) }}">Edit</a>
+            <a class="btn" href="{{ url_for('admin_stock_in', product_id=p['id']) }}">Stock In</a>
+            <a class="btn" href="{{ url_for('admin_stock_out', product_id=p['id']) }}">Stock Out</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

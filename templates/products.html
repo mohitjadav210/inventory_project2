@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Products</h2>
+
+<form method="get" class="mt-2">
+    <input type="text" name="search" placeholder="Search by name or category" value="{{ request.args.get('search', '') }}">
+    <button type="submit">Search</button>
+</form>
+
+<table class="table mt-2">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Action</th>
+    </tr>
+    {% for p in products %}
+    <tr>
+        <td>{{ p['id'] }}</td>
+        <td>{{ p['name'] }}</td>
+        <td>{{ p['category'] }}</td>
+        <td>{{ "%.2f"|format(p['price']) }}</td>
+        <td>{{ p['stock'] }}</td>
+        <td>
+            {% if p['stock'] > 0 %}
+            <form method="post" action="{{ url_for('add_to_cart', product_id=p['id']) }}" style="display:inline;">
+                <input type="number" name="quantity" value="1" min="1" max="{{ p['stock'] }}" style="width:60px;">
+                <button type="submit">Add to Cart</button>
+            </form>
+            {% else %}
+                Out of stock
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

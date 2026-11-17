@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Stock Out - {{ product['name'] }}</h2>
+<p>Current stock: {{ product['stock'] }}</p>
+
+<form method="post">
+    <label>Quantity to remove</label>
+    <input type="number" name="quantity" min="1" required>
+    <button type="submit">Remove Stock</button>
+</form>
+{% endblock %}

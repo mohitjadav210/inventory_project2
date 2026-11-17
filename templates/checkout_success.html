@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Purchase Successful</h2>
+<p>Your order has been placed.</p>
+
+<p><strong>Order ID:</strong> {{ order_id }}</p>
+<p><strong>Total Amount:</strong> {{ "%.2f"|format(total) }}</p>
+
+<ul class="mt-2">
+    <li><a href="{{ url_for('invoice', order_id=order_id) }}">Download Invoice (PDF)</a></li>
+    <li><a href="{{ url_for('payment_qr', order_id=order_id) }}">View Payment QR Code</a></li>
+</ul>
+
+<p class="mt-2"><a class="btn" href="{{ url_for('user_dashboard') }}">Back to Dashboard</a></p>
+{% endblock %}
